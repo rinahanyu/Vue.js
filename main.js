@@ -1,6 +1,30 @@
-const app = new Vue({
-  el: '#example',
-  data: {
-    greeting: 'Hello Vue.js!',
-  },
-});
+// --------------------------------------------------------
+// Vue.jsについて
+// --------------------------------------------------------
+// インスタンスの作成
+
+// const app = new Vue({
+//   el: '#example',
+//   data: {
+//     greeting: 'Hello Vue.js!',
+//   },
+// });
+
+
+// --------------------------------------------------------
+// DOM要素の属性と、Vueインスタンスのデータをバインディング
+// （Vue.jsで使用する特別な属性をディレクティブという。下記「v-bind」など）
+
+// const app = new Vue({
+//   el: '#example',
+//   data: {
+//     url: 'https://www.amazon.co.jp/',
+//   },
+// });
+
+// const app = new Vue({
+//   el: '#example',
+//   data: {
+//     name: '太郎',
+//   },
+// });

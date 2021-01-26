@@ -6,7 +6,16 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <div id="example">{{ greeting }}</div>
+    <!-- <div id="example">{{ greeting }}</div> -->
+    <!-- <div id="example">{{ `${greeting} 太郎さん！` }}</div> -->
+    <!-- <div id="example">{{ new Date().toLocaleString() }}</div> -->
+    <!-- <div id="example">
+      <a v-bind:href="url">アマゾン</a>
+    </div> -->
+    <div id="example">
+      <input type="text" v-bind:value="name">
+      <p>{{ name }}</p>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
