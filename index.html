@@ -12,10 +12,44 @@
     <!-- <div id="example">
       <a v-bind:href="url">アマゾン</a>
     </div> -->
-    <div id="example">
+    <!-- <div id="example">
       <input type="text" v-bind:value="name">
       <p>{{ name }}</p>
-    </div>
+    </div> -->
+    <!-- <ul id="example">
+      <li
+       v-for="member in members"
+       v-bind:key="member"
+      >
+        {{ member }}
+      </li>
+    </ul> -->
+    <!-- <ul id="example">
+      <li
+        v-for="(member, index) in members"
+        v-bind:key="index"
+      >
+        {{ index }}：{{ member }}
+      </li>
+    </ul> -->
+    <!-- // プロパティの値を格納した変数 in オブジェクト -->
+    <!-- <ul id="example">
+      <li
+        v-for="character in characters"
+        v-bind:key="character"
+      >
+        {{ character }}
+      </li>
+    </ul> -->
+    <!-- // (プロパティの値を格納した変数, プロパティ名を格納した変数) in オブジェクト -->
+    <ul id="example">
+      <li
+        v-for="(character, key) in characters"
+        v-bind:key="key"
+      >
+        {{ key }}：{{ character }}
+      </li>
+    </ul>
     <script src="main.js"></script>
   </body>
 </html>
