@@ -50,12 +50,42 @@
         {{ key }}：{{ character }}
       </li>
     </ul> -->
-    <div id="example">
+    <!-- <div id="example">
       <input
         v-bind:value="name"
         v-on:input="name = $event.target.value"
       >
       <p>{{ name }}</p>
+    </div> -->
+    <!-- <div id="example">
+      <input @input="name = $event.target.value" :value="name">
+      <p>{{ name }}</p>
+    </div> -->
+    <!-- <div id="example">
+      <input v-model="name">
+      <p>{{ name }}</p>
+    </div> -->
+    <!-- <div id="example">
+      <div>
+        <p>
+          身長： <input v-model="height" type="text"> cm
+        </p>
+        <p>
+          体重： <input v-model="weight" type="text"> kg
+        </p>
+      </div>
+      <div> -->
+        <!-- BMI: {{ weight / ((height / 100) * (height / 100)) || '' }} -->
+        <!-- BMI: {{ bmi }} -->
+        <!-- BMI: {{ getBmi() }}
+      </div>
+    </div> -->
+    <div id="example">
+      <p>
+        <button v-on:click="countUp()">{{ count }} 回</button>
+      </p>
+      <p>現在時刻（メソッド）： {{ getDate() }}</p>
+      <p>現在時刻（算出プロパティ）： {{ date }}</p>
     </div>
     <script src="main.js"></script>
   </body>

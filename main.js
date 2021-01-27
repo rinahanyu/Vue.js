@@ -60,9 +60,107 @@
 // --------------------------------------------------------
 // イベント
 
+// const app = new Vue({
+//   el: '#example',
+//   data: {
+//     name: '太郎',
+//   },
+// });
+
+
+// --------------------------------------------------------
+// ディレクティブの省略記法
+
+// v-bind:→:
+// v-on:input= → @イベントのタイプ(input)=
+
+
+// --------------------------------------------------------
+// フォームへ入力
+// input v-model="name"により、双方のバインディングが可能
+
+// const app = new Vue({
+//   el: '#example',
+//   data: {
+//     name: '太郎',
+//   },
+// });
+
+
+// --------------------------------------------------------
+// 算出プロパティ
+
+// const app = new Vue({
+//   el: '#example',
+//   data: {
+//     height: '',
+//     weight: '',
+//   },
+//   computed: {
+//     bmi() {
+//       if (this.height && this.weight) {
+//         // センチメートルをメートルに変換する
+//         const meterHeight = this.height / 100;
+
+//         // BMIを計算する
+//         const bmi = this.weight / (meterHeight * meterHeight);
+
+//         // 小数点以下の桁数を、２桁にして返す
+//         return bmi.toFixed(2);
+//       }
+
+//       return '';
+//     },
+//   },
+// });
+
+// --------------------------------------------------------
+// メソッド
+
+// const app = new Vue({
+//   el: '#example',
+//   data: {
+//     height: '',
+//     weight: '',
+//   },
+//   methods: {
+//     getBmi() {
+//       if (this.height && this.weight) {
+//         // センチメートルをメートルに変換する
+//         const meterHeight = this.height / 100;
+
+//         // BMIを計算する
+//         const bmi = this.weight / (meterHeight * meterHeight);
+
+//         // 小数点以下の桁数を、２桁にして返す
+//         return bmi.toFixed(2);
+//       }
+
+//       return '';
+//     },
+//   },
+// });
+
+
+// --------------------------------------------------------
+// 算出プロパティとメソッドの違い
+
 const app = new Vue({
   el: '#example',
   data: {
-    name: '太郎',
+    count: 0,
+  },
+  computed: {
+    date() {
+      return new Date().toLocaleString();
+    },
+  },
+  methods: {
+    countUp() {
+      this.count += 1;
+    },
+    getDate() {
+      return new Date().toLocaleString();
+    },
   },
 });
