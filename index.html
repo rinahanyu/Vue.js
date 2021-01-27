@@ -42,14 +42,21 @@
       </li>
     </ul> -->
     <!-- // (プロパティの値を格納した変数, プロパティ名を格納した変数) in オブジェクト -->
-    <ul id="example">
+    <!-- <ul id="example">
       <li
         v-for="(character, key) in characters"
         v-bind:key="key"
       >
         {{ key }}：{{ character }}
       </li>
-    </ul>
+    </ul> -->
+    <div id="example">
+      <input
+        v-bind:value="name"
+        v-on:input="name = $event.target.value"
+      >
+      <p>{{ name }}</p>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
