@@ -90,11 +90,11 @@
     </div> -->
 
     <!-- ---------------------------------------------------------- -->
-    <!-- タブの作成 -->
+    <!-- タブの作成① -->
     <!-- v-bind:class="{active: activeTab === 'tabs-1'}"は、class属性の属性値に{}でオブジェクトが指定されていて、
     プロパティ名 'active'、プロパティの値activeTab === 'tabs-1'が入っている。
     これはプロパティ値がtrueの場合に{active: true}となり、active というクラス名がli要素のclass属性の値に加えられる。 -->
-    <div id="example">
+    <!-- <div id="example">
       <ul class="tabs-menu">
         <li
           v-bind:class="{active: activeTab === 'tabs-1'}"
@@ -114,7 +114,7 @@
         >
           タブ3
         </li>
-      </ul>
+      </ul> -->
       <!-- ........................................................ -->
       <!-- v-showの場合 -->
       <!-- v-showディレクティブでは、属性値が true となる場合に要素を表示し、false となる場合に非表示にする。 -->
@@ -130,12 +130,12 @@
           <p>タブ3の内容が入ります。</p>
         </section>
       </section> -->
-      <!-- ........................................................ -->
+      <!-- ....................................... -->
       <!-- v-ifの場合 -->
       <!-- v-if ディレクティブでも、属性値が true となる場合に要素を表示し、false となる場合に非表示にする。 -->
       <!-- v-show のように v-if だけで書くこともできるが、v-else-if と v-else も使うと、１度に表示する要素は１つということが分かりやすくなる。処理としても、表示する要素は１つであることが保証される。 -->
       <!-- 非表示のタブについては、コードそのものを操作することとなるため、HTML上で存在しないこととなる。v-if の方が、初期表示の処理負担を軽くできるが、何度も表示を切り替える場合には、スタイル属性を変更するだけなのでv-showの方が処理の負担が軽い -->
-      <section class="tabs-content">
+      <!-- <section class="tabs-content">
         <section v-if="activeTab === 'tabs-1'">
           <p>タブ1の内容が入ります。</p>
         </section>
@@ -148,7 +148,35 @@
         <section v-else>
           <p>タブを選択してください。</p>
         </section>
-      </section>
+      </section> -->
+      <!-- .......................................... -->
+    <!-- </div> -->
+
+
+    <!-- ---------------------------------------------------------- -->
+    <!-- タブの作成② -->
+    <!-- template要素はHTMLのタグの1つとして定義されているものだが、 JavaScriptから「この要素を表示する」という命令を実行するまではブラウザに表示されない という特殊な要素。デフォルトでHTMLに描画されない性質を持つ。 -->
+    <div id="example">
+      <template v-if="tabs !== null">
+        <ul class="tabs-menu">
+          <li
+            v-for="tab in tabs"
+            v-bind:key="tab.id"
+            v-bind:class="{active: activeTab.id === tab.id}"
+            v-on:click="activeTab = tab"
+          >
+            {{ tab.title }}
+          </li>
+        </ul>
+        <section class="tabs-content">
+          <section>
+            <p>{{ activeTab.content }}</p>
+          </section>
+        </section>
+      </template>
+      <template v-else>
+        <p>データを取得中です。</p>
+      </template>
     </div>
     <script src="main.js"></script>
   </body>

@@ -169,12 +169,55 @@
 
 
 // --------------------------------------------------------
-// タブの作成
+// タブの作成①
 
-// v-showの場合
+// // v-showの場合
+// new Vue({
+//   el: '#example',
+//   data: {
+//     activeTab: 'tabs-1',
+//   },
+// });
+
+// // v-ifの場合
+// new Vue({
+//   el: '#example',
+//   data: {
+//     activeTab: '',
+//   },
+// });
+
+// --------------------------------------------------------
+// タブの作成②
+// createdオプションについては、ライフサイクルフック と呼ばれる関数の1つで、関数内に書いた処理が「Vueインスタンスの作成直後」に実行されるもの。
+
 new Vue({
   el: '#example',
   data: {
-    activeTab: '',
+    tabs: null,
+    activeTab: null,
+  },
+  created() {
+    setTimeout(() => {
+      const fetchedData = [
+        {
+          id: 'tabs-1',
+          title: 'タブ１',
+          content: 'タブ１の内容が入ります。',
+        },
+        {
+          id: 'tabs-2',
+          title: 'タブ２',
+          content: 'タブ２の内容が入ります。',
+        },
+        {
+          id: 'tabs-3',
+          title: 'タブ３',
+          content: 'タブ３の内容が入ります。',
+        },
+      ];
+      this.tabs = fetchedData;
+      this.activeTab = fetchedData[0];
+    }, 2000);
   },
 });
