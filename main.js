@@ -147,22 +147,34 @@
 // 参照しているVueインスタンスのデータが更新されたときだけ再計算される。
 // 以下の算出プロパティdate()では、countを参照していないため、count数が変化しても再計算されない。
 
-const app = new Vue({
+// const app = new Vue({
+//   el: '#example',
+//   data: {
+//     count: 0,
+//   },
+//   computed: {
+//     date() {
+//       return new Date().toLocaleString();
+//     },
+//   },
+//   methods: {
+//     countUp() {
+//       this.count += 1;
+//     },
+//     getDate() {
+//       return new Date().toLocaleString();
+//     },
+//   },
+// });
+
+
+// --------------------------------------------------------
+// タブの作成
+
+// v-showの場合
+new Vue({
   el: '#example',
   data: {
-    count: 0,
-  },
-  computed: {
-    date() {
-      return new Date().toLocaleString();
-    },
-  },
-  methods: {
-    countUp() {
-      this.count += 1;
-    },
-    getDate() {
-      return new Date().toLocaleString();
-    },
+    activeTab: 'tabs-1',
   },
 });

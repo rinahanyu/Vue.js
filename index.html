@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Vue.js Test</title>
+    <link rel="stylesheet" href="main.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
@@ -80,12 +81,53 @@
         <!-- BMI: {{ getBmi() }}
       </div>
     </div> -->
-    <div id="example">
+    <!-- <div id="example">
       <p>
         <button v-on:click="countUp()">{{ count }} 回</button>
       </p>
       <p>現在時刻（メソッド）： {{ getDate() }}</p>
       <p>現在時刻（算出プロパティ）： {{ date }}</p>
+    </div> -->
+
+    <!-- ---------------------------------------------------------- -->
+    <!-- タブの作成 -->
+    <!-- v-showの場合 -->
+    <!-- v-bind:class="{active: activeTab === 'tabs-1'}"は、class属性の属性値に{}でオブジェクトが指定されていて、
+    プロパティ名 'active'、プロパティの値activeTab === 'tabs-1'が入っている。
+    これはプロパティ値がtrueの場合に{active: true}となり、active というクラス名がli要素のclass属性の値に加えられる。 -->
+    <!-- v-showディレクティブでは、属性値が true となる場合に要素を表示し、false となる場合に非表示にする。 -->
+    <div id="example">
+      <ul class="tabs-menu">
+        <li
+          v-bind:class="{active: activeTab === 'tabs-1'}"
+          v-on:click="activeTab = 'tabs-1'"
+        >
+          タブ1
+        </li>
+        <li
+          v-bind:class="{active: activeTab === 'tabs-2'}"
+          v-on:click="activeTab = 'tabs-2'"
+        >
+          タブ2
+        </li>
+        <li
+          v-bind:class="{active: activeTab === 'tabs-3'}"
+          v-on:click="activeTab = 'tabs-3'"
+        >
+          タブ3
+        </li>
+      </ul>
+      <section class="tabs-content">
+        <section v-show="activeTab === 'tabs-1'">
+          <p>タブ1の内容が入ります。</p>
+        </section>
+        <section v-show="activeTab === 'tabs-2'">
+          <p>タブ2の内容が入ります。</p>
+        </section>
+        <section v-show="activeTab === 'tabs-3'">
+          <p>タブ3の内容が入ります。</p>
+        </section>
+      </section>
     </div>
     <script src="main.js"></script>
   </body>
