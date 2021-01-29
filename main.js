@@ -230,11 +230,27 @@
 // フック関数でも引数が二つ渡され、第１引数はディレクティブが紐づく要素、第２引数はオブジェクト。
 // このオブジェクトの中に、ディレクティブの名前や、属性値として渡される値などが入っている。v-hide-async="2000" の場合、プロパティが第２引数 binding のオブジェクトへ{name: 'hide-async', value: 2000}が設定されたことになる。
 
-Vue.directive('hide-async', {
+// Vue.directive('hide-async', {
+//   bind(el, binding) {
+//     setTimeout(() => {
+//       el.style.display = 'none';
+//     }, binding.value);
+//   },
+// });
+
+// new Vue({
+//   el: '#example',
+// });
+
+
+// --------------------------------------------------------
+// イベントハンドラ
+
+Vue.directive('change-color', {
   bind(el, binding) {
-    setTimeout(() => {
-      el.style.display = 'none';
-    }, binding.value);
+    el.addEventListener('click', () => {
+      el.style.color = binding.value;
+    });
   },
 });
 
