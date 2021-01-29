@@ -191,33 +191,53 @@
 // タブの作成②
 // createdオプションについては、ライフサイクルフック と呼ばれる関数の1つで、関数内に書いた処理が「Vueインスタンスの作成直後」に実行されるもの。
 
+// new Vue({
+//   el: '#example',
+//   data: {
+//     tabs: null,
+//     activeTab: null,
+//   },
+//   created() {
+//     setTimeout(() => {
+//       const fetchedData = [
+//         {
+//           id: 'tabs-1',
+//           title: 'タブ１',
+//           content: 'タブ１の内容が入ります。',
+//         },
+//         {
+//           id: 'tabs-2',
+//           title: 'タブ２',
+//           content: 'タブ２の内容が入ります。',
+//         },
+//         {
+//           id: 'tabs-3',
+//           title: 'タブ３',
+//           content: 'タブ３の内容が入ります。',
+//         },
+//       ];
+//       this.tabs = fetchedData;
+//       this.activeTab = fetchedData[0];
+//     }, 2000);
+//   },
+// });
+
+
+// --------------------------------------------------------
+// カスタムディレクティブ
+// Vue.directive というメソッドを呼び出し、引数を二つ渡す。第１引数はカスタムディレクティブの名前、第２引数は動作を定義するオブジェクトでフック関数という関数（メソッド）。
+// フック関数はあらかじめ決められた名前で関数を定義され、今回のbindはディレクティブが要素に紐づいたタイミングで１度だけ呼ばれるフック関数。
+// フック関数でも引数が二つ渡され、第１引数はディレクティブが紐づく要素、第２引数はオブジェクト。
+// このオブジェクトの中に、ディレクティブの名前や、属性値として渡される値などが入っている。v-hide-async="2000" の場合、プロパティが第２引数 binding のオブジェクトへ{name: 'hide-async', value: 2000}が設定されたことになる。
+
+Vue.directive('hide-async', {
+  bind(el, binding) {
+    setTimeout(() => {
+      el.style.display = 'none';
+    }, binding.value);
+  },
+});
+
 new Vue({
   el: '#example',
-  data: {
-    tabs: null,
-    activeTab: null,
-  },
-  created() {
-    setTimeout(() => {
-      const fetchedData = [
-        {
-          id: 'tabs-1',
-          title: 'タブ１',
-          content: 'タブ１の内容が入ります。',
-        },
-        {
-          id: 'tabs-2',
-          title: 'タブ２',
-          content: 'タブ２の内容が入ります。',
-        },
-        {
-          id: 'tabs-3',
-          title: 'タブ３',
-          content: 'タブ３の内容が入ります。',
-        },
-      ];
-      this.tabs = fetchedData;
-      this.activeTab = fetchedData[0];
-    }, 2000);
-  },
 });
