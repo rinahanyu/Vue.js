@@ -7,7 +7,7 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+  <link rel="stylesheet" href="main2.css">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
@@ -63,21 +63,39 @@
       </header>
     </div>
     <div class="row justify-content-center px-4">
-      <a
-        v-for="photo in photos"
-        v-bind:key="photo.id"
-        v-bind:href="photo.pageURL"
-        v-tooltip="photo.text"
-        class="d-inline-block"
-        target="_blank"
+      <p v-if="isInitalized">検索してください。</p>
+      <p
+        v-show="isFetching"
+        class="position-relative mx-auto"
       >
-        <img
-          v-bind:src="photo.imageURL"
-          v-bind:alt="photo.text"
-          width="150"
-          height="150"
+        <span
+          class="loading-icon fas fa-sync"
+          aria-hidden="true"
         >
-      </a>
+        </span>
+      </p>
+      <p v-show="isFailed">
+        データの取得に失敗しました。しばらく時間を置いてから、再度お試しください。
+      </p>
+      <div>
+        <template v-if="isFound">
+          <a
+            v-for="photo in photos"
+            v-bind:key="photo.id"
+            v-bind:href="photo.pageURL"
+            v-tooltip="photo.text"
+            class="d-inline-block"
+            target="_blank"
+          >
+            <img
+              v-bind:src="photo.imageURL"
+              v-bind:alt="photo.text"
+              width="150"
+              height="150"
+            >
+          </a>
+        </template>
+      </div>
     </div>
   </div>
   <!-- ---------------------------------------------------------- -->
@@ -90,6 +108,10 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <script src="main2.js"></script>
+
+
+  <!-- Font Awesome -->
+  <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
 </body>
 
 </html>

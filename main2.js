@@ -1,6 +1,11 @@
 // Flickr API key
-const apiKey = '*****';
+const apiKey = '******';
 
+// 状態の定数
+const IS_INITIALIZED = 'IS_INITIALIZED'; // 最初の状態
+const IS_FETCHING = 'IS_FETCHING'; // APIからデータを取得中
+const IS_FAILED = 'IS_FAILED'; // APIからデータを取得できなかった
+const IS_FOUND = 'IS_FOUND'; // APIから画像データを取得できた
 
 /**
  * --------------------
@@ -106,27 +111,113 @@ Vue.directive('tooltip', {
  * Vueインスタンス(検索写真表示)
  * -------------
  */
+// new Vue({
+//   el: '#app',
+//   data: {
+//     photos: [],
+//   },
+//   methods: {
+//     fetchImagesFromFlickr(event) {
+//       const searchText = event.target.elements.search.value;
+//       const url = getRequestURL(searchText);
+
+//       $.getJSON(url, (data) => {
+//         if (data.stat !== 'ok') {
+//           return;
+//         }
+
+//         this.photos = data.photos.photo.map(photo => ({
+//           id: photo.id,
+//           imageURL: getFlickrImageURL(photo, 'q'),
+//           pageURL: getFlickrPageURL(photo),
+//           text: getFlickrText(photo),
+//         }));
+//       });
+//     },
+//   },
+// });
+
+
+/**
+ * -------------
+ * Vueインスタンス(初期状態、取得中、取得失敗の表示追加)
+ * -------------
+ */
+
+//  定数として使用する変数名は、全て大文字とし、_で区切ると、変数名を見るだけで定数だと分かる。
+
 new Vue({
   el: '#app',
+
   data: {
+    prevSearchText: '',
     photos: [],
+    currentState: IS_INITIALIZED,
   },
+
+  computed: {
+    isInitalized() {
+      return this.currentState === IS_INITIALIZED;
+    },
+    isFetching() {
+      return this.currentState === IS_FETCHING;
+    },
+    isFailed() {
+      return this.currentState === IS_FAILED;
+    },
+    isFound() {
+      return this.currentState === IS_FOUND;
+    },
+  },
+
   methods: {
+    // 状態を変更する
+    toFetching() {
+      this.currentState = IS_FETCHING;
+    },
+    toFailed() {
+      this.currentState = IS_FAILED;
+    },
+    toFound() {
+      this.currentState = IS_FOUND;
+    },
+
     fetchImagesFromFlickr(event) {
       const searchText = event.target.elements.search.value;
-      const url = getRequestURL(searchText);
 
+      // APIからデータを取得中で、なおかつ検索テキストが前回の検索時と同じ場合、再度リクエストしない
+      if (this.isFetching && searchText === this.prevSearchText) {
+        return;
+      }
+
+      // Vueインスタンスのデータとして、検索テキストを保持しておく
+      this.prevSearchText = searchText;
+
+      this.toFetching();
+
+      const url = getRequestURL(searchText);
       $.getJSON(url, (data) => {
         if (data.stat !== 'ok') {
+          this.toFailed();
           return;
         }
 
-        this.photos = data.photos.photo.map(photo => ({
+        const fetchedPhotos = data.photos.photo;
+
+        // 検索テキストに該当する画像データがない場合
+        if (fetchedPhotos.length === 0) {
+          return;
+        }
+
+        this.photos = fetchedPhotos.map(photo => ({
           id: photo.id,
           imageURL: getFlickrImageURL(photo, 'q'),
           pageURL: getFlickrPageURL(photo),
           text: getFlickrText(photo),
         }));
+        this.toFound();
+      }).fail(() => {
+        this.toFailed();
       });
     },
   },
