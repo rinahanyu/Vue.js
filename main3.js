@@ -9,12 +9,35 @@
 // Vue.componentメソッドでコンポーネントを作成。第一引数にはコンポーネントの名前、第２引数には内容を渡す。
 // このコンポーネントは、Vueの管理下（今回は #example：つまり <div id="example">...</div> の中）でカスタム要素として使用できる。
 
+// Vue.component('button-preference', {
+//   template: '<button>いいね！</button>',
+// });
+
+// new Vue({
+//   el: '#example',
+// });
+
+// --------------------------------------------------------------------
+// コンポーネントにデータを渡す
+// --------------------------------------------------------------------
+// dataオプションを使うには、dataを関数として定義しなければならない。
+
 Vue.component('button-preference', {
-  template: '<button>いいね！</button>',
+  data() {
+    return { count: 0 };
+  },
+  methods: {
+    countUp() {
+      this.count += 1;
+    },
+  },
+  template: `
+    <button v-on:click="countUp">
+      {{ count }} いいね！
+    </button>
+  `,
 });
 
 new Vue({
   el: '#example',
 });
-
-// --------------------------------------------------------------------
