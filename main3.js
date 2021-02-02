@@ -108,34 +108,60 @@
 // --------------------------------------------------------------------
 // グローバル登録したコンポーネントの数が多くなるとコードが複雑でわかりにくくなるため、特定のコンポーネントないでしか使用しない場合は、ローカル登録する。
 
+// const buttonPreference = {
+//   template: `
+//     <button>いいね！</button>
+//   `,
+// };
+
+// const buttonEmpathy = {
+//   template: `
+//     <button>そだねー</button>
+//   `,
+// };
+
+// const buttonsSns = {
+//   components: {
+//     'button-preference': buttonPreference,
+//     'button-empathy': buttonEmpathy,
+//   },
+//   template: `
+//     <div>
+//       <button-preference></button-preference>
+//       <button-empathy></button-empathy>
+//     </div>
+//   `,
+// };
+
+// new Vue({
+//   el: '#example',
+//   components: {
+//     'buttons-sns': buttonsSns,
+//   },
+// });
+
+
+
+// --------------------------------------------------------------------
+// 親からデータを渡す
+// --------------------------------------------------------------------
+// 関数における引数のように、vueインスタンス（親）からcomponent（子）へデータを渡すことができる
+// propsは、jsでのpropertiesの略
+// propsの値はhtmlから渡す
+// propsの書き方は、jsファイルではキャメルケース、htmlファイルではケパブケースで記述すること
+
 const buttonPreference = {
+  props: ['initialCount'],
   template: `
-    <button>いいね！</button>
-  `,
-};
-
-const buttonEmpathy = {
-  template: `
-    <button>そだねー</button>
-  `,
-};
-
-const buttonsSns = {
-  components: {
-    'button-preference': buttonPreference,
-    'button-empathy': buttonEmpathy,
-  },
-  template: `
-    <div>
-      <button-preference></button-preference>
-      <button-empathy></button-empathy>
-    </div>
+    <button>
+      {{ initialCount }} いいね！
+    </button>
   `,
 };
 
 new Vue({
   el: '#example',
   components: {
-    'buttons-sns': buttonsSns,
+    'button-preference': buttonPreference,
   },
 });
