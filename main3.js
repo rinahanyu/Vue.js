@@ -150,11 +150,92 @@
 // propsの値はhtmlから渡す
 // propsの書き方は、jsファイルではキャメルケース、htmlファイルではケパブケースで記述すること
 
+// const buttonPreference = {
+//   props: ['initialCount'],
+//   template: `
+//     <button>
+//       {{ initialCount }} いいね！
+//     </button>
+//   `,
+// };
+
+// new Vue({
+//   el: '#example',
+//   components: {
+//     'button-preference': buttonPreference,
+//   },
+// });
+
+
+// --------------------------------------------------------------------
+// propsの検証
+// --------------------------------------------------------------------
+// 値を検証するためのルールを定義することもできる
+// type は、propsの型を検証するルール、required:trueは、値が必須ということを指定するルール
+
+// const buttonPreference = {
+//   props: {
+//     initialCount: {
+//       type: Number,
+//       required: true,
+//     },
+//   },
+//   template: `
+//     <button>
+//       {{ initialCount }} いいね！
+//     </button>
+//   `,
+// };
+
+// new Vue({
+//   el: '#example',
+//   components: {
+//     'button-preference': buttonPreference,
+//   },
+// });
+
+
+// --------------------------------------------------------------------
+// propsを子コンポーネント内で変更しない
+// --------------------------------------------------------------------
+// 通常propsは親（vueインスタンス）から子（component）のコンポーネントへ伝わるため、子の中でpropsの値を変更する処理は好ましくない→エラーとなる。
+// 以下、悪い例
+
+// const buttonPreference = {
+//   props: ['initialCount'],
+//   methods: {
+//     countUp() {
+//       this.initialCount += 1;
+//     },
+//   },
+//   template: `
+//     <button v-on:click="countUp">
+//       {{ initialCount }} いいね！
+//     </button>
+//   `,
+// };
+
+// new Vue({
+//   el: '#example',
+//   components: {
+//     'button-preference': buttonPreference,
+//   },
+// });
+
+// propsを変更しないように、他の変数countで定義し直して、同じ動作を記述。props自体は0から変更していない。
 const buttonPreference = {
   props: ['initialCount'],
+  data() {
+    return { count: this.initialCount };
+  },
+  methods: {
+    countUp() {
+      this.count += 1;
+    },
+  },
   template: `
-    <button>
-      {{ initialCount }} いいね！
+    <button v-on:click="countUp">
+      {{ count }} いいね！
     </button>
   `,
 };
