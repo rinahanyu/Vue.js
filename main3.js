@@ -223,10 +223,40 @@
 // });
 
 // propsを変更しないように、他の変数countで定義し直して、同じ動作を記述。props自体は0から変更していない。
+// const buttonPreference = {
+//   props: ['initialCount'],
+//   data() {
+//     return { count: this.initialCount };
+//   },
+//   methods: {
+//     countUp() {
+//       this.count += 1;
+//     },
+//   },
+//   template: `
+//     <button v-on:click="countUp">
+//       {{ count }} いいね！
+//     </button>
+//   `,
+// };
+
+// new Vue({
+//   el: '#example',
+//   components: {
+//     'button-preference': buttonPreference,
+//   },
+// });
+
+
+// --------------------------------------------------------------------
+// スロット
+// --------------------------------------------------------------------
+// slot要素は、コンポーネントの開始タグと終了タグの間に入れたコンテンツで置き換わるもの。slot要素を記述しないと、コンポーネントの間のテキストは表示されない。
+// slot要素は、コンポーネント内にテキストがあれば置き換えられ、なければslot内にテキストがあればそれが表示される
+
 const buttonPreference = {
-  props: ['initialCount'],
   data() {
-    return { count: this.initialCount };
+    return { count: 0 };
   },
   methods: {
     countUp() {
@@ -235,7 +265,7 @@ const buttonPreference = {
   },
   template: `
     <button v-on:click="countUp">
-      {{ count }} いいね！
+      {{ count }} <slot>いいね！</slot>
     </button>
   `,
 };
