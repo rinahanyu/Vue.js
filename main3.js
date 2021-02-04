@@ -254,25 +254,38 @@
 // slot要素は、コンポーネントの開始タグと終了タグの間に入れたコンテンツで置き換わるもの。slot要素を記述しないと、コンポーネントの間のテキストは表示されない。
 // slot要素は、コンポーネント内にテキストがあれば置き換えられ、なければslot内にテキストがあればそれが表示される
 
-const buttonPreference = {
-  data() {
-    return { count: 0 };
-  },
-  methods: {
-    countUp() {
-      this.count += 1;
-    },
-  },
-  template: `
-    <button v-on:click="countUp">
-      {{ count }} <slot>いいね！</slot>
-    </button>
-  `,
-};
+// const buttonPreference = {
+//   data() {
+//     return { count: 0 };
+//   },
+//   methods: {
+//     countUp() {
+//       this.count += 1;
+//     },
+//   },
+//   template: `
+//     <button v-on:click="countUp">
+//       {{ count }} <slot>いいね！</slot>
+//     </button>
+//   `,
+// };
+
+// new Vue({
+//   el: '#example',
+//   components: {
+//     'button-preference': buttonPreference,
+//   },
+// });
+
+
+// --------------------------------------------------------------------
+// プラグイン
+// --------------------------------------------------------------------
 
 new Vue({
   el: '#example',
   components: {
-    'button-preference': buttonPreference,
+    carousel: VueCarousel.Carousel,
+    slide: VueCarousel.Slide,
   },
 });

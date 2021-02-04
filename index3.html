@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Vue.js Test</title>
+    <link rel="stylesheet" href="main3.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
@@ -10,9 +11,16 @@
       <!-- <buttons-preference></buttons-preference> -->
       <!-- <buttons-sns></buttons-sns> -->
       <!-- <button-preference v-bind:initial-count="0"></button-preference> -->
-      <button-preference></button-preference>
-      <button-preference>すごいね！</button-preference>
+      <!-- <button-preference></button-preference>
+      <button-preference>すごいね！</button-preference> -->
+      <carousel>
+        <slide><span class="label">スライド１の内容</span></slide>
+        <slide><span class="label">スライド２の内容</span></slide>
+        <slide><span class="label">スライド３の内容</span></slide>
+        <slide><span class="label">スライド４の内容</span></slide>
+      </carousel>
     </div>
+    <script src="https://ssense.github.io/vue-carousel/js/vue-carousel.min.js"></script>
     <script src="main3.js"></script>
   </body>
 </html>
